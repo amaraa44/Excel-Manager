@@ -1,6 +1,8 @@
 # Excel-Manager
 ### In Hungary, sorry.  
 
+[Letölteni ide kattintva lehet.](https://github.com/amaraa44/Excel-Manager/raw/master/Download%20from%20here/Excel%20Manager.exe).
+
 **A probléma:**  
   Sok bérlapot kellett kimenteni Excelből úgy hogy semilyen adat sem változik a táblázatban kivéve egyetlen egyet a nevet. Mivel ez elég monoton Excelben, át írni a nevet menteni, megint át irni a nevet megint menteni. Mivel sok név van ezért ez elég sokáig is tart.
   
