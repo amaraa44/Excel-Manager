@@ -18,9 +18,18 @@ namespace Excel_Manager
         private string nevekPath;
         private string metesPath;
 
+        public static int nevekSor = 1;
+        public static int nevekOszlop = 1;
+        public static int berlapSor = 1;
+        public static int berlapOszlop = 1;
+
         public Form1()
         {
             InitializeComponent();
+        }
+        public void setNevekSor(int i)
+        {
+            nevekSor = i;
         }
 
         private void berlapFileDialogBtn_Click(object sender, EventArgs e)
@@ -83,6 +92,16 @@ namespace Excel_Manager
 
         private void startBtn_Click(object sender, EventArgs e)
         {
+            if(nevekPath == null || metesPath == null || berlapPath == null)
+            {
+                //MessageBox.Show(nevekOszlop.ToString());
+
+                MessageBox.Show("Add meg az útvonalakat. \n(Bérlap helye, nevek helye, mentés helye)");
+                return;
+            }
+
+            
+
             try
             {
                 progressBar.Value = 0;
@@ -122,16 +141,25 @@ namespace Excel_Manager
                 Excel.Range usedRange = nevekSheet.UsedRange;
                 int nevekSzama = usedRange.Rows.Count;
 
+                int sorokSzama = 0;
+                int nevS = nevekSor;
+                while(!String.IsNullOrEmpty((string)(nevekSheet.Cells[nevS, nevekOszlop] as Excel.Range).Value)){
+                    sorokSzama++;
+                    nevS++;
+                }
+                //MessageBox.Show(sorokSzama.ToString());
+
                 progressBar.Value = 15;
 
-            
-                for(int i = 1; i <= nevekSzama; i++)
+                MessageBox.Show(nevS.ToString());
+                int utolsoSor = nevS;
+                for(int i = nevekSor; i < utolsoSor; i++)
                 {
                     //Aktuális név kiszedése az excelből
-                    string actualNev = (string)(nevekSheet.Cells[i, 1] as Excel.Range).Value;
+                    string actualNev = (string)(nevekSheet.Cells[i, nevekOszlop] as Excel.Range).Value;
 
                     //Aktuális név berakása az excelbe
-                    (berlapSheet.Cells[1, 1] as Excel.Range).Value = actualNev;
+                    (berlapSheet.Cells[berlapSor, berlapOszlop] as Excel.Range).Value = actualNev;
 
                     //Mentés as
                     berlap.SaveAs(metesPath + "/" + actualNev + ".xlsx");
@@ -194,6 +222,13 @@ namespace Excel_Manager
             }
 
             
+        }
+
+        private void customSettingsBtn_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.Show();
+
         }
     }
 }

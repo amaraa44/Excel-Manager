@@ -7,3 +7,5 @@ c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.
 c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.exe
 c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.pdb
 c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.csproj.ResolveComReference.cache
+C:\Users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.csprojResolveAssemblyReference.cache
+C:\Users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel_Manager.Form2.resources

@@ -46,6 +46,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.customSettingsBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -147,9 +148,9 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(12, 401);
+            this.progressBar.Location = new System.Drawing.Point(12, 412);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(568, 23);
+            this.progressBar.Size = new System.Drawing.Size(568, 26);
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 10;
             // 
@@ -232,11 +233,22 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Külön mappa";
             // 
+            // customSettingsBtn
+            // 
+            this.customSettingsBtn.Location = new System.Drawing.Point(12, 362);
+            this.customSettingsBtn.Name = "customSettingsBtn";
+            this.customSettingsBtn.Size = new System.Drawing.Size(119, 35);
+            this.customSettingsBtn.TabIndex = 18;
+            this.customSettingsBtn.Text = "Egyéb beállítás";
+            this.customSettingsBtn.UseVisualStyleBackColor = true;
+            this.customSettingsBtn.Click += new System.EventHandler(this.customSettingsBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 450);
+            this.Controls.Add(this.customSettingsBtn);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -277,6 +289,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button customSettingsBtn;
     }
 }
 

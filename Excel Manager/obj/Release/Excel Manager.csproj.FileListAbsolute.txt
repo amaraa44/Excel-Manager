@@ -7,3 +7,4 @@ c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Release\Excel Manage
 c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Release\Excel Manager.csproj.CoreCompileInputs.cache
 c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Release\Excel Manager.exe
 c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Release\Excel Manager.pdb
+C:\Users\halma\source\repos\Excel Manager\Excel Manager\obj\Release\Excel Manager.csprojResolveAssemblyReference.cache
