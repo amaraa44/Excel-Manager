@@ -1,0 +1,9 @@
+c:\users\halma\source\repos\Excel Manager\Excel Manager\bin\Debug\Excel Manager.exe
+c:\users\halma\source\repos\Excel Manager\Excel Manager\bin\Debug\Excel Manager.pdb
+c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel_Manager.Form1.resources
+c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel_Manager.Properties.Resources.resources
+c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.csproj.GenerateResource.cache
+c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.csproj.CoreCompileInputs.cache
+c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.exe
+c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.pdb
+c:\users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.csproj.ResolveComReference.cache
