@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel Manager", "Excel Manager\Excel Manager.csproj", "{20DED03F-77A3-42B3-98B8-D25CF9908E7B}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{BA8BBA85-1C9D-4892-A137-39B0BF5EFEEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,9 @@ Global
 		{20DED03F-77A3-42B3-98B8-D25CF9908E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20DED03F-77A3-42B3-98B8-D25CF9908E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20DED03F-77A3-42B3-98B8-D25CF9908E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA8BBA85-1C9D-4892-A137-39B0BF5EFEEE}.Debug|Any CPU.ActiveCfg = Debug
+		{BA8BBA85-1C9D-4892-A137-39B0BF5EFEEE}.Release|Any CPU.ActiveCfg = Release
+		{BA8BBA85-1C9D-4892-A137-39B0BF5EFEEE}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
