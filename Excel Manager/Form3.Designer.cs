@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.btn1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -58,8 +59,9 @@
             this.ClientSize = new System.Drawing.Size(283, 133);
             this.Controls.Add(this.btn1);
             this.Controls.Add(this.listBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form3";
-            this.Text = "Form3";
+            this.Text = "Nyomtatási beállítás";
             this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);
 

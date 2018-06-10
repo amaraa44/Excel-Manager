@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.berlapFileDialogBtn = new System.Windows.Forms.Button();
             this.berlapFDTxtBox = new System.Windows.Forms.TextBox();
             this.nevekFDTxtBox = new System.Windows.Forms.TextBox();
@@ -317,6 +318,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.startBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Excel manager";
