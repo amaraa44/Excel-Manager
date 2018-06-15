@@ -71,6 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dialogs\MyFolderDialog.cs" />
+    <Compile Include="Exports\Excels\MyExcel.cs" />
+    <Compile Include="Exports\Excels\IMyExcel.cs" />
+    <Compile Include="Exports\Export\Export.cs" />
+    <Compile Include="Exports\Export\IExport.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

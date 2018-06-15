@@ -10,6 +10,8 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.IO;
 using Excel_Manager.Dialogs;
+using Excel_Manager.Exports.Excels;
+using Excel_Manager.Exports.Export;
 
 namespace Excel_Manager
 {
@@ -27,13 +29,12 @@ namespace Excel_Manager
 
         public static String printerName;
 
-
+        //TODO: ProgressBar and make nicer the printing.
 
         public Form1()
         {
             InitializeComponent();
         }
-
 
         private void berlapFileDialogBtn_Click(object sender, EventArgs e)
         {
@@ -86,45 +87,30 @@ namespace Excel_Manager
             }
         }
 
-
-        private Excel.Application berlapExcel;
-        private Excel.Workbook berlap;
-        private Excel.Worksheet berlapSheet;
-
-        private Excel.Application nevekExcel;
-        private Excel.Workbook nevek;
-        private Excel.Worksheet nevekSheet;
+        private MyExcel berlap;
+        private MyExcel nevek;
         private void startBtn_Click(object sender, EventArgs e)
         {
             if(nevekPath == null || mentesPath == null || berlapPath == null)
             {
-                //MessageBox.Show(nevekOszlop.ToString());
-
                 MessageBox.Show("Add meg az útvonalakat. \n(Bérlap helye, nevek helye, mentés helye)");
                 return;
             }
 
-            
+
 
             try
             {
                 
                 progressBar.Value = 0;
-                //MessageBox.Show(berlapPath + "\n" + nevekPath + "\n" + metesPath);
 
                 //Berlap
-                berlapExcel = new Excel.Application();
-                berlap = berlapExcel.Workbooks.Open(berlapPath);
-                berlapSheet = berlapExcel.ActiveSheet as Excel.Worksheet;
+                berlap = new MyExcel();
+                berlap.Open(berlapPath);
 
-
-                progressBar.Value = 5;
                 //Nevek
-                nevekExcel = new Excel.Application();
-                nevek = nevekExcel.Workbooks.Open(nevekPath);
-                nevekSheet = nevekExcel.ActiveSheet as Excel.Worksheet;
-
-                progressBar.Value = 10;
+                nevek = new MyExcel();
+                nevek.Open(nevekPath);
 
                 //Mappa készítés
                 if (mentesMappabaCheckBox.Checked)
@@ -141,52 +127,20 @@ namespace Excel_Manager
                     
                 }
 
-
-                //Nevek szama
-                Excel.Range usedRange = nevekSheet.UsedRange;
-                int nevekSzama = usedRange.Rows.Count;
-
-                int sorokSzama = 0;
-                int nevS = nevekSor;
-                while(!String.IsNullOrEmpty((string)(nevekSheet.Cells[nevS, nevekOszlop] as Excel.Range).Value)){
-                    sorokSzama++;
-                    nevS++;
-                }
-                //MessageBox.Show(sorokSzama.ToString());
-
-                progressBar.Value = 15;
-
-                //MessageBox.Show(nevS.ToString());
-                int utolsoSor = nevS;
-
-                nevekList = new List<String>();
-                for (int i = nevekSor; i < utolsoSor; i++)
+                Export export = new Export();
+                List<string> nevekList = export.nevekList(nevek, nevekSor, nevekOszlop);
+                if (export.ExportIt(nevekList, berlap, mentesPath, berlapSor, berlapOszlop))
                 {
-                    //Aktuális név kiszedése az excelből
-                    string actualNev = (string)(nevekSheet.Cells[i, nevekOszlop] as Excel.Range).Value;
+                    progressBar.Value = 100;
 
-                    //Aktuális név berakása az excelbe
-                    nevekList.Add(actualNev);
-                    (berlapSheet.Cells[berlapSor, berlapOszlop] as Excel.Range).Value = actualNev;
+                    MessageBox.Show("Kész!");
 
-                    //Mentés as
-                    berlap.SaveAs(mentesPath + "/" + actualNev + ".xlsx");
-
-                    progressBar.Value = progressBar.Value + 75 / nevekSzama;
+                    printBtn.Enabled = true;
                 }
-                //MessageBox.Show(progressBar.Value.ToString());
-
-
-
-                progressBar.Value += 5;
-
-                //Finish
-                //MessageBox.Show(progressBar.Value.ToString());
-                progressBar.Value = 100;
-                MessageBox.Show("Kész van!");
-                //MessageBox.Show(nevekList[0]);
-
-                printBtn.Enabled = true;
+                else
+                {
+                    MessageBox.Show("Valami nem oké!");
+                }                
             }
             catch (IOException error)
             {
@@ -196,19 +150,9 @@ namespace Excel_Manager
             {
                 //Close berlap
                 berlap.Close();
-                berlapExcel.Quit();
-                Marshal.ReleaseComObject(berlapExcel);
-                Marshal.ReleaseComObject(berlapSheet);
-                Marshal.ReleaseComObject(berlap);
-
-                //progressBar.Value += 5;
 
                 //Close nevek
                 nevek.Close();
-                nevekExcel.Quit();
-                Marshal.ReleaseComObject(nevekExcel);
-                Marshal.ReleaseComObject(nevekSheet);
-                Marshal.ReleaseComObject(nevek);
             }
             
         }
