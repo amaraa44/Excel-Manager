@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Excel Manager.exe" size="52224">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Excel Manager.exe" size="52736">
       <assemblyIdentity name="Excel Manager" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>cJ65s9PXYSyqc72DlVuz/YAs+ZQ=</dsig:DigestValue>
+        <dsig:DigestValue>BBLNJhL2ZT+K77atySPGazj6Wzg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

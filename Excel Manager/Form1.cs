@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.IO;
+using Excel_Manager.Dialogs;
 
 namespace Excel_Manager
 {
@@ -32,23 +33,18 @@ namespace Excel_Manager
         {
             InitializeComponent();
         }
-        public void setNevekSor(int i)
-        {
-            nevekSor = i;
-        }
+
 
         private void berlapFileDialogBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                OpenFileDialog ofd = new OpenFileDialog();
+                MyFileDialog myFileDialog = new MyFileDialog("Excel|*.xlsx");
 
-                ofd.Filter = "Excel|*.xlsx";
-                if(ofd.ShowDialog() == DialogResult.OK)
-                {
-                    berlapFDTxtBox.Text = ofd.FileName;
-                    berlapPath = ofd.FileName;
-                }
+                myFileDialog.open();
+
+                berlapFDTxtBox.Text = myFileDialog.Path;
+                berlapPath = myFileDialog.Path;
             }catch(IOException error)
             {
                 MessageBox.Show("Hiba kód: 1\n" + error.Message.ToString());
@@ -59,40 +55,35 @@ namespace Excel_Manager
         private void nevekFileDialogBtn_Click(object sender, EventArgs e)
         {
             try {
-                OpenFileDialog ofd = new OpenFileDialog();
 
-                ofd.Filter = "Excel|*.xlsx";
-                if(ofd.ShowDialog() == DialogResult.OK)
-                {
-                    nevekFDTxtBox.Text = ofd.FileName;
-                    nevekPath = ofd.FileName;
-                }
-            } catch (IOException error)
+                MyFileDialog myFileDialog = new MyFileDialog("Excel|*.xlsx");
+
+                myFileDialog.open();
+
+                nevekFDTxtBox.Text = myFileDialog.Path;
+                nevekPath = myFileDialog.Path;  
+            }
+            catch(IOException error)
             {
                 MessageBox.Show("Hiba kód: 2\n" + error.Message.ToString());
             }
-
-
         }
-
+     
         private void mentesFileDialogBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                FolderBrowserDialog fbd = new FolderBrowserDialog();
+                MyFolderDialog myFolderDialog = new MyFolderDialog();
 
-                if(fbd.ShowDialog() == DialogResult.OK)
-                {
-                    mentesFDTxtBox.Text = fbd.SelectedPath;
-                    mentesPath = fbd.SelectedPath;
-                }
+                myFolderDialog.open();
+
+                mentesFDTxtBox.Text = myFolderDialog.Path;
+                mentesPath = myFolderDialog.Path;
             }
             catch (IOException error)
             {
                 MessageBox.Show("Hiba kód: 3\n" + error.Message.ToString());
             }
-
-
         }
 
 
