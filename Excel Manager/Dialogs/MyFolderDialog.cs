@@ -7,12 +7,11 @@ using System.Windows.Forms;
 
 namespace Excel_Manager.Dialogs
 {
-    class MyFolderDialog : IDialogs
+    class MyFolderDialog : Dialog
     {
 
-        public string Path { get; set; }
 
-        public void open()
+        public override void Open()
         {
             try
             {

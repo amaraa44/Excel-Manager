@@ -42,7 +42,7 @@ namespace Excel_Manager
             {
                 MyFileDialog myFileDialog = new MyFileDialog("Excel|*.xlsx");
 
-                myFileDialog.open();
+                myFileDialog.Open();
 
                 berlapFDTxtBox.Text = myFileDialog.Path;
                 berlapPath = myFileDialog.Path;
@@ -59,7 +59,7 @@ namespace Excel_Manager
 
                 MyFileDialog myFileDialog = new MyFileDialog("Excel|*.xlsx");
 
-                myFileDialog.open();
+                myFileDialog.Open();
 
                 nevekFDTxtBox.Text = myFileDialog.Path;
                 nevekPath = myFileDialog.Path;  
@@ -76,7 +76,7 @@ namespace Excel_Manager
             {
                 MyFolderDialog myFolderDialog = new MyFolderDialog();
 
-                myFolderDialog.open();
+                myFolderDialog.Open();
 
                 mentesFDTxtBox.Text = myFolderDialog.Path;
                 mentesPath = myFolderDialog.Path;
@@ -128,7 +128,7 @@ namespace Excel_Manager
                 }
 
                 Export export = new Export();
-                List<string> nevekList = export.nevekList(nevek, nevekSor, nevekOszlop);
+                List<string> nevekList = export.List(nevek, nevekSor, nevekOszlop);
                 if (export.ExportIt(nevekList, berlap, mentesPath, berlapSor, berlapOszlop))
                 {
                     progressBar.Value = 100;

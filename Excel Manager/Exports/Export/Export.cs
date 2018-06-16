@@ -6,14 +6,14 @@ using Excel_Manager.Exports.Excels;
 
 namespace Excel_Manager.Exports.Export
 {
-    class Export : IExport
+    class Export
     {
 
         public Export()
         {
         }
 
-        public List<string> nevekList(MyExcel nevek, int sor, int oszlop)
+        public List<string> List(MyExcel nevek, int sor, int oszlop)
         {
             List<string> list = new List<string>();
 

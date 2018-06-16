@@ -3,19 +3,17 @@ using System.Windows.Forms;
 
 namespace Excel_Manager.Dialogs
 {
-    class MyFileDialog : IDialogs
+    class MyFileDialog : Dialog
     {
 
         private string _filter;
-
-        public string Path { get; set; }
 
         public MyFileDialog(string filter)
         {
             _filter = filter;
         }
 
-        public void open()
+        public override void Open()
         {
             try
             {
