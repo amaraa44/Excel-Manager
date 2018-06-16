@@ -13,7 +13,7 @@ namespace Excel_Manager.Exports.Export
         {
         }
 
-        public List<string> List(MyExcel nevek, int sor, int oszlop)
+        public List<string> nevekList(MyExcel nevek, int sor, int oszlop)
         {
             List<string> list = new List<string>();
 

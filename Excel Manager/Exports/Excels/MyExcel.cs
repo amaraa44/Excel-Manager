@@ -9,6 +9,9 @@ namespace Excel_Manager.Exports.Excels
 {
     class MyExcel
     {
+        public MyExcel()
+        {
+        }
 
         public Excel.Application App { get; set; }
         public Excel.Workbook WB { get; set; }
