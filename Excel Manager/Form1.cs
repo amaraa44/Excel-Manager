@@ -135,6 +135,7 @@ namespace Excel_Manager
                 progBar.Increase(5);
                 Export export = new Export(progBar);
                 List<string> nevekList = export.nevekList(nevek, nevekSor, nevekOszlop);
+                _nevekList = nevekList;
 
                 progBar.Increase(10);
 
