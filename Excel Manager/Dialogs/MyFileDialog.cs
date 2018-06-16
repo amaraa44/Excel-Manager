@@ -6,13 +6,13 @@ namespace Excel_Manager.Dialogs
     class MyFileDialog : IDialogs
     {
 
-        private string _filter;
+        private string filter;
 
         public string Path { get; set; }
 
-        public MyFileDialog(string filter)
+        public MyFileDialog(string _filter)
         {
-            _filter = filter;
+            filter = _filter;
         }
 
         public void open()
@@ -20,7 +20,7 @@ namespace Excel_Manager.Dialogs
             try
             {
                 OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = _filter;
+                ofd.Filter = filter;
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {

@@ -9,38 +9,38 @@ namespace Excel_Manager.ProgBar
 
     public class MyProgressBar
     {
-        private ProgressBar _progBar;
+        private ProgressBar progBar;
 
-        public MyProgressBar(ProgressBar progBar)
+        public MyProgressBar(ProgressBar _progBar)
         {
-            _progBar = progBar;
-            _progBar.Value = 0;
+            progBar = _progBar;
+            progBar.Value = 0;
         }
 
-        public int Value { get => _progBar.Value; set => _progBar.Value = value; }
+        public int Value { get => progBar.Value; set => progBar.Value = value; }
 
         public bool Increase(int step)
         {
-            if((step > 0) && ((Value + step) > _progBar.Maximum))
+            if((step > 0) && ((Value + step) > progBar.Maximum))
             {
                 return false;
             }
             else
             {
-                _progBar.Increment(step);
+                progBar.Increment(step);
                 return true;
             }
         }
 
         public bool Decrease(int step)
         {
-            if((step > 0) && ((Value - step) < _progBar.Minimum))
+            if((step > 0) && ((Value - step) < progBar.Minimum))
             {
                 return false;
             }
             else
             {
-                _progBar.Increment(-step);
+                progBar.Increment(-step);
                 return true;
             }
         }
@@ -49,7 +49,7 @@ namespace Excel_Manager.ProgBar
         {
             int step = 0;
 
-            int diff = maximum - _progBar.Value;
+            int diff = maximum - progBar.Value;
             step = diff / numberOfSteps;
 
             return step;
@@ -57,7 +57,7 @@ namespace Excel_Manager.ProgBar
 
         public void CatchUp()
         {
-            _progBar.Value = _progBar.Maximum;
+            progBar.Value = progBar.Maximum;
         }
     }
 }

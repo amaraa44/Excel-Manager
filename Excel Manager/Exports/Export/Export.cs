@@ -9,16 +9,16 @@ namespace Excel_Manager.Exports.Export
 {
     class Export
     {
-        MyProgressBar _progBar;
+        private MyProgressBar progBar;
 
         public Export()
         {
 
         }
 
-        public Export(MyProgressBar progressBar)
+        public Export(MyProgressBar _progBar)
         {
-            _progBar = progressBar;
+            progBar = _progBar;
         }
 
         public List<string> nevekList(MyExcel nevek, int sor, int oszlop)
@@ -51,8 +51,8 @@ namespace Excel_Manager.Exports.Export
                 {
                     (berlap.WS.Cells[sor, oszlop] as Microsoft.Office.Interop.Excel.Range).Value = nev;
                     berlap.WB.SaveAs(mentesPath + "/" + nev + ".xlsx");
-                    int step = _progBar.CalcSteps(nev.Length, 95);
-                    _progBar.Increase(step);
+                    int step = progBar.CalcSteps(nev.Length, 95);
+                    progBar.Increase(step);
                 }
 
                 return true;
