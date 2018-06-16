@@ -12,6 +12,7 @@ using System.IO;
 using Excel_Manager.Dialogs;
 using Excel_Manager.Exports.Excels;
 using Excel_Manager.Exports.Export;
+using Excel_Manager.ProgBar;
 
 namespace Excel_Manager
 {
@@ -20,7 +21,7 @@ namespace Excel_Manager
         private string berlapPath;
         private string nevekPath;
         private string mentesPath;
-        private List<String> nevekList;
+        private List<String> _nevekList;
 
         public static int nevekSor = 1;
         public static int nevekOszlop = 1;
@@ -101,16 +102,20 @@ namespace Excel_Manager
 
             try
             {
-                
-                progressBar.Value = 0;
+
+                MyProgressBar progBar = new MyProgressBar(progressBar);
 
                 //Berlap
                 berlap = new MyExcel();
                 berlap.Open(berlapPath);
 
+                progBar.Increase(5);
+
                 //Nevek
                 nevek = new MyExcel();
                 nevek.Open(nevekPath);
+
+                progBar.Increase(5);
 
                 //Mappa készítés
                 if (mentesMappabaCheckBox.Checked)
@@ -127,11 +132,15 @@ namespace Excel_Manager
                     
                 }
 
-                Export export = new Export();
+                progBar.Increase(5);
+                Export export = new Export(progBar);
                 List<string> nevekList = export.nevekList(nevek, nevekSor, nevekOszlop);
+
+                progBar.Increase(10);
+
                 if (export.ExportIt(nevekList, berlap, mentesPath, berlapSor, berlapOszlop))
                 {
-                    progressBar.Value = 100;
+                    progBar.CatchUp();
 
                     MessageBox.Show("Kész!");
 
@@ -204,6 +213,12 @@ namespace Excel_Manager
         {
             nyomtatProgBar.Value = 0;
 
+            if(_nevekList.Count == 0)
+            {
+                MessageBox.Show("Nem tudok mit nyomtatni.");
+                return;
+            }
+
             try
             {
                 
@@ -225,10 +240,10 @@ namespace Excel_Manager
 
             try
             {
-                for (int i = 0; i < nevekList.Count; i++)
+                for (int i = 0; i < _nevekList.Count; i++)
                 {
                     printExcel = new Excel.Application();
-                    printWB = printExcel.Workbooks.Open(mentesPath + "/" + nevekList[i] + ".xlsx");
+                    printWB = printExcel.Workbooks.Open(mentesPath + "/" + _nevekList[i] + ".xlsx");
                     printWS = printExcel.ActiveSheet as Excel.Worksheet;
 
 
@@ -237,7 +252,7 @@ namespace Excel_Manager
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
 
-                    nyomtatProgBar.Value = nyomtatProgBar.Value + (100 / nevekList.Count );
+                    nyomtatProgBar.Value = nyomtatProgBar.Value + (100 / _nevekList.Count );
                 }
             }
             catch(IOException error)

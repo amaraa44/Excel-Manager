@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Excel_Manager.Exports.Excels;
+using Excel_Manager.ProgBar;
 
 namespace Excel_Manager.Exports.Export
 {
     class Export
     {
+        MyProgressBar _progBar;
 
         public Export()
         {
+
+        }
+
+        public Export(MyProgressBar progressBar)
+        {
+            _progBar = progressBar;
         }
 
         public List<string> nevekList(MyExcel nevek, int sor, int oszlop)
@@ -30,6 +38,7 @@ namespace Excel_Manager.Exports.Export
             for(int i = sor; i < utolsoSor; i++)
             {
                 list.Add((string)(nevek.WS.Cells[i, oszlop] as Microsoft.Office.Interop.Excel.Range).Value);
+
             }
             return list;
         }
@@ -42,6 +51,8 @@ namespace Excel_Manager.Exports.Export
                 {
                     (berlap.WS.Cells[sor, oszlop] as Microsoft.Office.Interop.Excel.Range).Value = nev;
                     berlap.WB.SaveAs(mentesPath + "/" + nev + ".xlsx");
+                    int step = _progBar.CalcSteps(nev.Length, 95);
+                    _progBar.Increase(step);
                 }
 
                 return true;
