@@ -14,4 +14,3 @@ C:\Users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.
 C:\Users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.exe.manifest
 C:\Users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.application
 C:\Users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel_Manager.Form3.resources
-C:\Users\halma\source\repos\Excel Manager\Excel Manager\obj\Debug\Excel Manager.csprojAssemblyReference.cache

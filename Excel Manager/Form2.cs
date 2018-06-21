@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Excel_Manager
@@ -16,24 +10,24 @@ namespace Excel_Manager
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void BtnApplyClick(object sender, EventArgs e)
         {
-            int nevO = (int)(nevekOszlop.Value);
-            int nevS = (int)(nevekSor.Value);
+            var nevO = (int)(nevekOszlop.Value);
+            var nevS = (int)(nevekSor.Value);
 
-            int blapO = (int)(berlapOszlop.Value);
-            int blapS = (int)(berlapSor.Value);
+            var blapO = (int)(berlapOszlop.Value);
+            var blapS = (int)(berlapSor.Value);
 
             if(nevO <= 0 || nevS <= 0 || blapO <= 0 || blapS <= 0)
             {
                 MessageBox.Show("Az egyik érték kisebb vagy egyenlő mint nulla!\nNulla vagy negatív értékű cellák nincsenek az Excelben!");
             }
             
-            Form1.nevekOszlop = nevO;
-            Form1.nevekSor = nevS;
+            Form1.NevekOszlop = nevO;
+            Form1.NevekSor = nevS;
 
-            Form1.berlapOszlop = blapO;
-            Form1.berlapSor = blapS;
+            Form1.BerlapOszlop = blapO;
+            Form1.BerlapSor = blapS;
 
             this.Close();
         }

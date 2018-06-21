@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Windows.Forms;
 
 namespace Excel_Manager.Dialogs
@@ -12,11 +8,11 @@ namespace Excel_Manager.Dialogs
 
         public string Path { get; set; }
 
-        public void open()
+        public void Open()
         {
             try
             {
-                FolderBrowserDialog fbd = new FolderBrowserDialog();
+                var fbd = new FolderBrowserDialog();
 
                 if(fbd.ShowDialog() == DialogResult.OK)
                 {
@@ -24,7 +20,7 @@ namespace Excel_Manager.Dialogs
                 }
             }catch(IOException error)
             {
-                MessageBox.Show("Hiba kód: 1.2\n" + error.Message.ToString());
+                MessageBox.Show("Hiba kód: 1.2\n" + error.Message);
             }
         }
     }

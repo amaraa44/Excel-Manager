@@ -1,63 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Excel_Manager.ProgBar
 {
-
     public class MyProgressBar
     {
-        private ProgressBar progBar;
+        private readonly ProgressBar _progBar;
 
-        public MyProgressBar(ProgressBar _progBar)
+        public MyProgressBar(ProgressBar progBar)
         {
-            progBar = _progBar;
-            progBar.Value = 0;
+            _progBar = progBar;
+            _progBar.Value = 0;
         }
 
-        public int Value { get => progBar.Value; set => progBar.Value = value; }
+        public int Value
+        {
+            get => _progBar.Value;
+            set => _progBar.Value = value;
+        }
 
         public bool Increase(int step)
         {
-            if((step > 0) && ((Value + step) > progBar.Maximum))
-            {
+            if (step > 0 && Value + step > _progBar.Maximum)
                 return false;
-            }
-            else
-            {
-                progBar.Increment(step);
-                return true;
-            }
+            _progBar.Increment(step);
+            return true;
         }
 
         public bool Decrease(int step)
         {
-            if((step > 0) && ((Value - step) < progBar.Minimum))
+            if (step > 0 && Value - step < _progBar.Minimum)
             {
                 return false;
             }
-            else
-            {
-                progBar.Increment(-step);
-                return true;
-            }
+            _progBar.Increment(-step);
+            return true;
         }
 
         public int CalcSteps(int numberOfSteps, int maximum)
         {
-            int step = 0;
-
-            int diff = maximum - progBar.Value;
-            step = diff / numberOfSteps;
+            var diff = maximum - _progBar.Value;
+            var step = diff / numberOfSteps;
 
             return step;
         }
 
         public void CatchUp()
         {
-            progBar.Value = progBar.Maximum;
+            _progBar.Value = _progBar.Maximum;
         }
     }
 }

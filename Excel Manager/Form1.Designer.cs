@@ -66,7 +66,7 @@
             this.berlapFileDialogBtn.TabIndex = 0;
             this.berlapFileDialogBtn.Text = "Fájl megnyitás";
             this.berlapFileDialogBtn.UseVisualStyleBackColor = true;
-            this.berlapFileDialogBtn.Click += new System.EventHandler(this.berlapFileDialogBtn_Click);
+            this.berlapFileDialogBtn.Click += new System.EventHandler(this.BerlapFileDialogBtn_Click);
             // 
             // berlapFDTxtBox
             // 
@@ -93,7 +93,7 @@
             this.nevekFileDialogBtn.TabIndex = 2;
             this.nevekFileDialogBtn.Text = "Fájl megnyitás";
             this.nevekFileDialogBtn.UseVisualStyleBackColor = true;
-            this.nevekFileDialogBtn.Click += new System.EventHandler(this.nevekFileDialogBtn_Click);
+            this.nevekFileDialogBtn.Click += new System.EventHandler(this.NevekFileDialogBtn_Click);
             // 
             // mentesFDTxtBox
             // 
@@ -112,7 +112,7 @@
             this.mentesFileDialogBtn.TabIndex = 4;
             this.mentesFileDialogBtn.Text = "Mappa választás";
             this.mentesFileDialogBtn.UseVisualStyleBackColor = true;
-            this.mentesFileDialogBtn.Click += new System.EventHandler(this.mentesFileDialogBtn_Click);
+            this.mentesFileDialogBtn.Click += new System.EventHandler(this.MentesFileDialogBtn_Click);
             // 
             // label1
             // 
@@ -158,7 +158,7 @@
             this.startBtn.TabIndex = 9;
             this.startBtn.Text = "Csináld";
             this.startBtn.UseVisualStyleBackColor = true;
-            this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
+            this.startBtn.Click += new System.EventHandler(this.StartBtn_Click);
             // 
             // progressBar
             // 
@@ -180,7 +180,7 @@
             this.mentesMappabaCheckBox.TabIndex = 11;
             this.mentesMappabaCheckBox.Text = "Csináljon külön mappát";
             this.mentesMappabaCheckBox.UseVisualStyleBackColor = true;
-            this.mentesMappabaCheckBox.CheckedChanged += new System.EventHandler(this.mentesMappabaCheckBox_CheckedChanged);
+            this.mentesMappabaCheckBox.CheckedChanged += new System.EventHandler(this.MentesMappabaCheckBox_CheckedChanged);
             // 
             // label4
             // 
@@ -268,7 +268,7 @@
             this.customSettingsBtn.TabIndex = 18;
             this.customSettingsBtn.Text = "Egyéb beállítás";
             this.customSettingsBtn.UseVisualStyleBackColor = true;
-            this.customSettingsBtn.Click += new System.EventHandler(this.customSettingsBtn_Click);
+            this.customSettingsBtn.Click += new System.EventHandler(this.CustomSettingsBtn_Click);
             // 
             // nyomtatProgBar
             // 
@@ -290,7 +290,7 @@
             this.printBtn.TabIndex = 19;
             this.printBtn.Text = "Nyomtat";
             this.printBtn.UseVisualStyleBackColor = true;
-            this.printBtn.Click += new System.EventHandler(this.button1_Click);
+            this.printBtn.Click += new System.EventHandler(this.BtnPrint);
             // 
             // button1
             // 
@@ -301,7 +301,7 @@
             this.button1.TabIndex = 21;
             this.button1.Text = "Nyomtatási beállítás";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.BtnPrinterSetting);
             // 
             // Form1
             // 

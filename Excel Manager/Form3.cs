@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Excel_Manager
@@ -31,7 +25,7 @@ namespace Excel_Manager
 
         private void btn1_Click(object sender, EventArgs e)
         {
-            Form1.printerName = listBox1.SelectedItem.ToString();
+            Form1.PrinterName = listBox1.SelectedItem.ToString();
             this.Close();
         }
     }

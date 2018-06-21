@@ -6,21 +6,20 @@ namespace Excel_Manager.Dialogs
     class MyFileDialog : IDialogs
     {
 
-        private string filter;
+        private string _filter;
 
         public string Path { get; set; }
 
-        public MyFileDialog(string _filter)
+        public MyFileDialog(string filter)
         {
-            filter = _filter;
+            _filter = filter;
         }
 
-        public void open()
+        public void Open()
         {
             try
             {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = filter;
+                var ofd = new OpenFileDialog {Filter = _filter};
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
@@ -29,7 +28,7 @@ namespace Excel_Manager.Dialogs
             }
             catch(IOException error)
             {
-                MessageBox.Show("Hiba kód: 1.1\n" + error.Message.ToString());
+                MessageBox.Show("Hiba kód: 1.1\n" + error.Message);
             }
         }
     }

@@ -93,6 +93,7 @@
     </Compile>
     <Compile Include="Dialogs\IDialogs.cs" />
     <Compile Include="Dialogs\MyFileDialog.cs" />
+    <Compile Include="Printing\MyPrinting.cs" />
     <Compile Include="ProgBar\MyProgressBar.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,33 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Excel_Manager.Exports.Excels;
+﻿using Excel_Manager.Exports.Excels;
 using Excel_Manager.ProgBar;
+using Microsoft.Office.Interop.Excel;
+using System.Collections.Generic;
 
 namespace Excel_Manager.Exports.Export
 {
     class Export
     {
-        private MyProgressBar progBar;
+        private MyProgressBar _progBar;
 
         public Export()
         {
-
         }
 
-        public Export(MyProgressBar _progBar)
+        public Export(MyProgressBar progBar)
         {
-            progBar = _progBar;
+            _progBar = progBar;
         }
 
-        public List<string> nevekList(MyExcel nevek, int sor, int oszlop)
+        public List<string> NevekList(MyExcel nevek, int sor, int oszlop)
         {
-            List<string> list = new List<string>();
+            var list = new List<string>();
 
-            int utolsoSor = sor;
-            int currentSor = sor;
-            while (!String.IsNullOrEmpty((string)(nevek.WS.Cells[currentSor, oszlop] as Microsoft.Office.Interop.Excel.Range).Value))
+            var utolsoSor = sor;
+            var currentSor = sor;
+            while (!string.IsNullOrEmpty((string) ((Range) nevek.WS.Cells[currentSor, oszlop]).Value))
             {
                 currentSor++;
                 utolsoSor++;
@@ -35,32 +32,25 @@ namespace Excel_Manager.Exports.Export
             //Microsoft.Office.Interop.Excel.Range usedRange = nevek.WS.UsedRange;
             //utolsoSor = usedRange.Rows.Count + 1;
 
-            for(int i = sor; i < utolsoSor; i++)
+            for (int i = sor; i < utolsoSor; i++)
             {
-                list.Add((string)(nevek.WS.Cells[i, oszlop] as Microsoft.Office.Interop.Excel.Range).Value);
-
+                list.Add((string) ((Range) nevek.WS.Cells[i, oszlop]).Value);
             }
             return list;
         }
 
-        public Boolean ExportIt(List<string> list, MyExcel berlap, string mentesPath, int sor, int oszlop)
+        public bool ExportIt(List<string> list, MyExcel berlap, string mentesPath, int sor, int oszlop)
         {
-            if(list.Count != 0)
+            if (list.Count == 0) return false;
+            foreach (var nev in list)
             {
-                foreach(string nev in list)
-                {
-                    (berlap.WS.Cells[sor, oszlop] as Microsoft.Office.Interop.Excel.Range).Value = nev;
-                    berlap.WB.SaveAs(mentesPath + "/" + nev + ".xlsx");
-                    int step = progBar.CalcSteps(nev.Length, 95);
-                    progBar.Increase(step);
-                }
+                ((Range) berlap.WS.Cells[sor, oszlop]).Value = nev;
+                berlap.WB.SaveAs(mentesPath + "/" + nev + ".xlsx");
+                var step = _progBar.CalcSteps(nev.Length, 95);
+                _progBar.Increase(step);
+            }
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
     }
 }

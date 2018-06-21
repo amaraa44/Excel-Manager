@@ -1,119 +1,125 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using Excel = Microsoft.Office.Interop.Excel;
-using System.Runtime.InteropServices;
-using System.IO;
-using Excel_Manager.Dialogs;
+﻿using Excel_Manager.Dialogs;
 using Excel_Manager.Exports.Excels;
 using Excel_Manager.Exports.Export;
+using Excel_Manager.Printing;
 using Excel_Manager.ProgBar;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Excel_Manager
 {
     public partial class Form1 : Form
     {
-        private string berlapPath;
-        private string nevekPath;
-        private string mentesPath;
+        private string _berlapPath;
+        private string _nevekPath;
+        private string _mentesPath;
         private List<String> _nevekList;
 
-        public static int nevekSor = 1;
-        public static int nevekOszlop = 1;
-        public static int berlapSor = 1;
-        public static int berlapOszlop = 1;
+        public static int NevekSor = 1;
+        public static int NevekOszlop = 1;
+        public static int BerlapSor = 1;
+        public static int BerlapOszlop = 1;
 
-        public static String printerName;
-
-        //TODO: ProgressBar and make nicer the printing.
+        public static String PrinterName;
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void berlapFileDialogBtn_Click(object sender, EventArgs e)
+        private void BerlapFileDialogBtn_Click(object sender, EventArgs e)
         {
             try
             {
                 MyFileDialog myFileDialog = new MyFileDialog("Excel|*.xlsx");
 
-                myFileDialog.open();
+                myFileDialog.Open();
 
                 berlapFDTxtBox.Text = myFileDialog.Path;
-                berlapPath = myFileDialog.Path;
+                _berlapPath = myFileDialog.Path;
             }catch(IOException error)
             {
-                MessageBox.Show("Hiba kód: 1\n" + error.Message.ToString());
+                MessageBox.Show("Hiba kód: 1\n" + error.Message);
             }
             
         }
 
-        private void nevekFileDialogBtn_Click(object sender, EventArgs e)
+        private void NevekFileDialogBtn_Click(object sender, EventArgs e)
         {
             try {
 
                 MyFileDialog myFileDialog = new MyFileDialog("Excel|*.xlsx");
 
-                myFileDialog.open();
+                myFileDialog.Open();
 
                 nevekFDTxtBox.Text = myFileDialog.Path;
-                nevekPath = myFileDialog.Path;  
+                _nevekPath = myFileDialog.Path;  
             }
             catch(IOException error)
             {
-                MessageBox.Show("Hiba kód: 2\n" + error.Message.ToString());
+                MessageBox.Show("Hiba kód: 2\n" + error.Message);
             }
         }
      
-        private void mentesFileDialogBtn_Click(object sender, EventArgs e)
+        private void MentesFileDialogBtn_Click(object sender, EventArgs e)
         {
             try
             {
                 MyFolderDialog myFolderDialog = new MyFolderDialog();
 
-                myFolderDialog.open();
+                myFolderDialog.Open();
 
                 mentesFDTxtBox.Text = myFolderDialog.Path;
-                mentesPath = myFolderDialog.Path;
+                _mentesPath = myFolderDialog.Path;
             }
             catch (IOException error)
             {
-                MessageBox.Show("Hiba kód: 3\n" + error.Message.ToString());
+                MessageBox.Show("Hiba kód: 3\n" + error.Message);
             }
         }
 
-        private MyExcel berlap;
-        private MyExcel nevek;
-        private void startBtn_Click(object sender, EventArgs e)
+        private MyExcel _berlap;
+        private MyExcel _nevek;
+        private void StartBtn_Click(object sender, EventArgs e)
         {
-            if(nevekPath == null || mentesPath == null || berlapPath == null)
+
+            if (_berlapPath == null && berlapFDTxtBox != null)
+            {
+                _berlapPath = berlapFDTxtBox.Text;
+            }
+
+            if (_nevekPath == null && nevekFDTxtBox != null)
+            {
+                _nevekPath = nevekFDTxtBox.Text;
+            }
+
+            if (_mentesPath == null && mentesFDTxtBox != null)
+            {
+                _mentesPath = mentesFDTxtBox.Text;
+            }
+
+            if(_nevekPath == null || _mentesPath == null || _berlapPath == null)
             {
                 MessageBox.Show("Add meg az útvonalakat. \n(Bérlap helye, nevek helye, mentés helye)");
                 return;
             }
 
-
-
             try
             {
 
-                MyProgressBar progBar = new MyProgressBar(progressBar);
+                var progBar = new MyProgressBar(progressBar);
 
                 //Berlap
-                berlap = new MyExcel();
-                berlap.Open(berlapPath);
+                _berlap = new MyExcel();
+                _berlap.Open(_berlapPath);
 
                 progBar.Increase(5);
 
                 //Nevek
-                nevek = new MyExcel();
-                nevek.Open(nevekPath);
+                _nevek = new MyExcel();
+                _nevek.Open(_nevekPath);
 
                 progBar.Increase(5);
 
@@ -126,20 +132,20 @@ namespace Excel_Manager
                     }
                     else
                     {
-                        Directory.CreateDirectory(mentesPath + "/" + dirName.Text);
-                        mentesPath = mentesPath + "/" + dirName.Text;
+                        Directory.CreateDirectory(_mentesPath + "/" + dirName.Text);
+                        _mentesPath = _mentesPath + "/" + dirName.Text;
                     }
                     
                 }
 
                 progBar.Increase(5);
-                Export export = new Export(progBar);
-                List<string> nevekList = export.nevekList(nevek, nevekSor, nevekOszlop);
+                var export = new Export(progBar);
+                var nevekList = export.NevekList(_nevek, NevekSor, NevekOszlop);
                 _nevekList = nevekList;
 
                 progBar.Increase(10);
 
-                if (export.ExportIt(nevekList, berlap, mentesPath, berlapSor, berlapOszlop))
+                if (export.ExportIt(nevekList, _berlap, _mentesPath, BerlapSor, BerlapOszlop))
                 {
                     progBar.CatchUp();
 
@@ -154,25 +160,20 @@ namespace Excel_Manager
             }
             catch (IOException error)
             {
-                MessageBox.Show("Hiba kód: 4\n" + error.Message.ToString());
+                MessageBox.Show("Hiba kód: 4\n" + error.Message);
             }
             finally
             {
                 //Close berlap
-                berlap.Close();
+                _berlap.Close();
 
                 //Close nevek
-                nevek.Close();
+                _nevek.Close();
             }
             
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void mentesMappabaCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void MentesMappabaCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
@@ -187,32 +188,30 @@ namespace Excel_Manager
             }
             catch (IOException error)
             {
-                MessageBox.Show("Hiba kód: 5\n" + error.Message.ToString());
+                MessageBox.Show("Hiba kód: 5\n" + error.Message);
             }
 
             
         }
 
-        private void customSettingsBtn_Click(object sender, EventArgs e)
+        private void CustomSettingsBtn_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
+            var form2 = new Form2();
             form2.Show();
-
         }
 
 
-        private bool printPreview = false;
+        private MyExcel _printExcel;
 
-        private Excel.Application printExcel;
-        private Excel.Workbook printWB;
-        private Excel.Worksheet printWS;
-
-        private System.Drawing.Printing.PrinterSettings printerSettings;
+        private System.Drawing.Printing.PrinterSettings _printerSettings;
 
 
-        private void button1_Click(object sender, EventArgs e)
+        //PRINTING
+        private void BtnPrint(object sender, EventArgs e)
         {
-            nyomtatProgBar.Value = 0;
+
+            var progBar = new MyProgressBar(nyomtatProgBar) {Value = 0};
+
 
             if(_nevekList.Count == 0)
             {
@@ -223,10 +222,10 @@ namespace Excel_Manager
             try
             {
                 
-                if(printerName == "")
+                if(PrinterName == "")
                 {
-                    printerSettings = new System.Drawing.Printing.PrinterSettings();
-                    printerName = printerSettings.PrinterName;
+                    _printerSettings = new System.Drawing.Printing.PrinterSettings();
+                    PrinterName = _printerSettings.PrinterName;
                 }
                 
             }
@@ -235,47 +234,46 @@ namespace Excel_Manager
                 MessageBox.Show("Nem található nyomtató.");
                 return;
             }
-            
-            
+
+            progBar.Increase(5);
 
 
             try
             {
-                for (int i = 0; i < _nevekList.Count; i++)
+                foreach (string nev in _nevekList)
                 {
-                    printExcel = new Excel.Application();
-                    printWB = printExcel.Workbooks.Open(mentesPath + "/" + _nevekList[i] + ".xlsx");
-                    printWS = printExcel.ActiveSheet as Excel.Worksheet;
+                    _printExcel = new MyExcel();
+                    _printExcel.Open(_mentesPath + "/" + nev + ".xlsx");
+
+                    var print = new MyPrinting(_printExcel, PrinterName);
+                    print.PrintIt();
 
 
-                    printWB.PrintOutEx(Type.Missing, Type.Missing, Type.Missing, printPreview, printerName, false, false, Type.Missing, false);
-
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-
-                    nyomtatProgBar.Value = nyomtatProgBar.Value + (100 / _nevekList.Count );
+                    var step = progBar.CalcSteps(_nevekList.Count, 95);
+                    progBar.Increase(step);
                 }
             }
-            catch(IOException error)
+            catch (IOException error)
             {
-                MessageBox.Show("Hiba kód: 6\n" + error.Message.ToString());
+                _printExcel.Close();
+
+                MessageBox.Show("Hiba kód: 6\n" + error.Message);
             }
             finally
             {
-                Marshal.FinalReleaseComObject(printWS);
-
-                printWB.Close();
-                Marshal.FinalReleaseComObject(printWB);
-
-                printExcel.Quit();
-                Marshal.FinalReleaseComObject(printExcel);
+                progBar.CatchUp();
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void BtnPrinterSetting(object sender, EventArgs e)
         {
-            Form3 form3 = new Form3();
+            var form3 = new Form3();
             form3.Show();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

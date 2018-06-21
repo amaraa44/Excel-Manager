@@ -11,6 +11,6 @@ namespace Excel_Manager.Dialogs
         string Path { get; set; }
 
         //Open file and set the path param.
-        void open();
+        void Open();
     }
 }
